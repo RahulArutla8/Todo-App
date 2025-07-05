@@ -9,21 +9,26 @@
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
     .todos-bg-container {
       background-color: #f9fbfe;
       min-height: 100vh;
+      padding-bottom: 100px; /* Ensures space for Save button */
     }
 
     .todos-heading {
       text-align: center;
-      font-family: "Roboto";
       font-size: 46px;
       font-weight: 500;
       margin: 20px 0;
     }
 
     .create-task-heading, .todo-items-heading {
-      font-family: "Roboto";
       font-size: 32px;
       font-weight: 700;
     }
@@ -44,13 +49,11 @@
     .button {
       color: white;
       background-color: #4c63b6;
-      font-family: "Roboto";
       font-size: 18px;
       border: none;
       border-radius: 4px;
       margin-top: 20px;
-      margin-bottom: 50px;
-      padding: 5px 20px;
+      padding: 8px 20px;
     }
 
     .todo-items-container {
@@ -77,7 +80,6 @@
     }
 
     .checkbox-label {
-      font-family: "Roboto";
       font-size: 16px;
       font-weight: 400;
       width: 82%;
@@ -98,6 +100,11 @@
     .checked {
       text-decoration: line-through;
     }
+
+    /* Optional: Add some spacing below the last button */
+    .save-button-container {
+      margin-top: 30px;
+    }
   </style>
 </head>
 <body>
@@ -105,7 +112,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12">
-          <h1 class="todos-heading">Todos</h1>
+          <h1 class="todos-heading">To-do List</h1>
           <h1 class="create-task-heading">
             Create <span class="create-task-heading-subpart">Task</span>
           </h1>
@@ -115,7 +122,9 @@
             My <span class="todo-items-heading-subpart">Tasks</span>
           </h1>
           <ul class="todo-items-container" id="todoItemsContainer"></ul>
-          <button class="button" id="saveTodoButton">Save</button>
+          <div class="save-button-container">
+            <button class="button" id="saveTodoButton">Save</button>
+          </div>
         </div>
       </div>
     </div>
@@ -137,6 +146,7 @@
 
     saveTodoButton.onclick = function () {
       localStorage.setItem("todoList", JSON.stringify(todoList));
+      alert("Todo list saved!");
     };
 
     function onAddTodo() {
@@ -144,7 +154,7 @@
       let userInputValue = userInputElement.value;
 
       if (userInputValue === "") {
-        alert("Enter Valid Text");
+        alert("Enter valid text");
         return;
       }
 
